@@ -90,104 +90,22 @@ footer{border-top:1px solid #212121;padding-top:18px;font-size:11px;color:var(--
 </style>
 </head>
 <body>
-<aside class="side">
-  <div class="name">Jeeyeon Kim</div>
-  <div class="gap"></div>
-  <p><a href="tel:+821082529225">+82 10-8252-9225</a></p>
-  <p><a href="mailto:zrsmov@gmail.com">zrsmov@gmail.com</a></p>
-  <div class="gap"></div>
-  <p>Seoul, Korea</p>
-  <a class="ig" href="https://www.instagram.com/z_raeng" target="_blank" rel="noopener" aria-label="Instagram">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-  </a>
-</aside>
+<aside class="side" id="side"></aside>
 
 <main>
-  <h1 class="head">김지연 <span class="bar"></span> <small>Video Creator &amp; Editor</small></h1>
-
+  <h1 class="head" id="head"></h1>
   <section class="top">
-    <div class="photo"><img src="images/profile.jpg" alt="촬영 중인 김지연" width="1280" height="854"></div>
-    <div class="career">
-      <h2>아웃도어 영상 촬영/편집 이력</h2>
-      <ul>
-<li>2026 제주오름트레일러닝 대회 촬영/ 편집</li>
-<li>2026 순토 서울트레일 22K 영상 촬영 / 릴스영상 편집</li>
-<li>2026 제주국제트레일러닝 100K 대회 영상 촬영 / 편집<span class="sub">+ stage 1,2 현장 촬영편집 후 당일 영상 시사</span></li>
-<li>2025 트랜스제주 byUTMB 영상 촬영/편집</li>
-<li>2025 서울100K 영상 촬영/편집<span class="sub">+ 오리엔테이션 영상 제작</span></li>
-<li>2025 순토 서울트레일 22K 영상 촬영/편집</li>
-<li>2025 제주오름트레일런 대회 영상 촬영/편집</li>
-<li>2025 제주국제트레일러닝 100K 영상 촬영/편집</li>
-<li>2024 서울100K 영상 촬영/편집<span class="sub">+ 오리엔테이션 영상 제작</span></li>
-<li>2024 트랜스제주 by UTMB 영상 촬영/편집</li>
-<li>2024 블랙야크 트레일런 대회 영상 촬영</li>
-<li>2024 제주국제트레일러닝 100K 영상 촬영/편집</li>
-<li>2023 서울100K 영상 촬영/편집<span class="sub">+ 전광판용 홍보 영상, 오리엔테이션 영상 제작</span><span class="sub">+ 트레일러닝 클래스 영상 촬영/편집</span></li>
-<li>2023 트랜스제주 by utmb 영상 촬영/편집</li>
-<li>2023 제주국제트레일러닝 대회 영상 촬영/편집</li>
-<li>2023 블랙야크 트레일런 영상 촬영/편집</li>
-<li>2023 대전 트레일온런 영상 촬영/편집</li>
-<li>2023 제1회 동아 펜싱대회 영상 촬영/편집</li>
-<li>2023 서울시 7979 러닝크루 영상 촬영/편집</li>
-      </ul>
-    </div>
-  </section>
-
-  <hr>
-  <section class="intro">
-<p>찰나의 순간을 프레임 안에 온전히 담아내는 영상 제작자, 김지연입니다.</p>
-<p>자연을, 그중에서도 산과 동물을 특히 좋아합니다.</p>
-<p>예측할 수 없는 대회 현장에서 선수들과 함께 두 발로 달리며,<br>그 순간에만 존재하는 생생한 감정을 가장 가까운 시선으로 포착하려 합니다.<br>그날 그 장소에서만 느낄 수 있는 자연의 숨결과 분위기를 섬세하게 담아내는 것이 제 촬영의 출발점입니다.<br>참가자들의 빛나는 환희부터 한계 앞의 긴장과 시련까지, 대회가 만들어내는 다양한 서사를 깊이 있는 시선으로 지켜보고 기록해왔습니다.<br>주로 순발력과 빠른 판단이 요구되는 트레일러닝 대회 현장 스케치 촬영을 주로 맡아왔으며, 필요 시 현장 당일 편집 시사도 진행합니다.<br>편집 단계에서는 영상에서 전달하고자 하는 메시지와 톤을 가장 먼저 중시하여 작업합니다.<br>협업 촬영자들의 소스까지 꼼꼼히 살펴 좋은 컷을 선별하고, 이를 하나의 완성된 스토리로 엮어내는 데 공을 들입니다.</p>
-<p>감사합니다.</p>
+    <div class="photo"><img id="profilePhoto" alt="" width="1280" height="854"></div>
+    <div class="career"><h2 id="careerTitle"></h2><ul id="career"></ul></div>
   </section>
   <hr>
-
+  <section class="intro" id="intro"></section>
+  <hr>
   <h2 class="label">촬영 현장</h2>
-  <div class="grid" id="fields">
-<button class="cell" data-img="images/field1.jpg" aria-label="촬영 현장 사진 1 크게 보기"><img src="images/field1.jpg" alt="촬영 현장 1" loading="lazy"></button>
-<button class="cell" data-img="images/field2.jpg" aria-label="촬영 현장 사진 2 크게 보기"><img src="images/field2.jpg" alt="촬영 현장 2" loading="lazy"></button>
-<button class="cell" data-img="images/field3.jpg" aria-label="촬영 현장 사진 3 크게 보기"><img src="images/field3.jpg" alt="촬영 현장 3" loading="lazy"></button>
-<button class="cell" data-img="images/field4.jpg" aria-label="촬영 현장 사진 4 크게 보기"><img src="images/field4.jpg" alt="촬영 현장 4" loading="lazy"></button>
-  </div>
-
+  <div class="grid" id="fields"></div>
   <h2 class="label">Mov</h2>
-  <div class="grid" id="movs">
-<button class="cell vid" data-yt="HNlsEDRm7rE" aria-label="영상 1 재생"><img src="images/mov01.jpg" alt="영상 1" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="KkIyYarb-Dw" aria-label="영상 2 재생"><img src="images/mov02.jpg" alt="영상 2" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="gBot7bMp4fs" aria-label="영상 3 재생"><img src="images/mov03.jpg" alt="영상 3" loading="lazy"><span class="play"></span></button>
-<div class="cell"><img src="images/mov04.jpg" alt="영상 4" loading="lazy"></div>
-<button class="cell vid" data-yt="JWQU3rWmBsY" aria-label="영상 5 재생"><img src="images/mov05.jpg" alt="영상 5" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="cektby9-g40" aria-label="2025 Seoul100K (ver.3min) 재생"><img src="images/mov06.jpg" alt="2025 Seoul100K (ver.3min)" loading="lazy"><span class="play"></span><span class="cap">2025 Seoul100K (ver.3min)</span></button>
-<button class="cell vid" data-yt="HOR8KGglujA" aria-label="영상 7 재생"><img src="images/mov07.jpg" alt="영상 7" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="yzIguRc10l4" aria-label="영상 8 재생"><img src="images/mov08.jpg" alt="영상 8" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="XvkUgOMzOxo" aria-label="영상 9 재생"><img src="images/mov09.jpg" alt="영상 9" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="n6vfWUiiWCQ" aria-label="영상 10 재생"><img src="images/mov10.jpg" alt="영상 10" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="NkyspRTbhEA" aria-label="영상 11 재생"><img src="images/mov11.jpg" alt="영상 11" loading="lazy"><span class="play"></span></button>
-<div class="cell"><img src="images/mov12.jpg" alt="영상 12" loading="lazy"></div>
-<button class="cell vid" data-yt="zig94qN-lqw" aria-label="영상 13 재생"><img src="images/mov13.jpg" alt="영상 13" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="pE7pHsaaftQ" aria-label="영상 14 재생"><img src="images/mov14.jpg" alt="영상 14" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="t4xmBHHt9ws" aria-label="영상 15 재생"><img src="images/mov15.jpg" alt="영상 15" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="w2tp8Do6ZX8" aria-label="영상 16 재생"><img src="images/mov16.jpg" alt="영상 16" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="2RpqGFa3euU" aria-label="영상 17 재생"><img src="images/mov17.jpg" alt="영상 17" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="ldI7Xu2pL6o" aria-label="영상 18 재생"><img src="images/mov18.jpg" alt="영상 18" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="6wqMzk6zucc" aria-label="영상 19 재생"><img src="images/mov19.jpg" alt="영상 19" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="ylLiSp8VPXg" aria-label="영상 20 재생"><img src="images/mov20.jpg" alt="영상 20" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="2xZP3WfmtbA" aria-label="영상 21 재생"><img src="images/mov21.jpg" alt="영상 21" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="ObgXXfcbQSY" aria-label="영상 22 재생"><img src="images/mov22.jpg" alt="영상 22" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="U-TP91NyfSA" aria-label="영상 23 재생"><img src="images/mov23.jpg" alt="영상 23" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="L1cyex5L558" aria-label="영상 24 재생"><img src="images/mov24.jpg" alt="영상 24" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="GZs4K09G7lI" aria-label="영상 25 재생"><img src="images/mov25.jpg" alt="영상 25" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="tEuq5Y6XN_Y" aria-label="영상 26 재생"><img src="images/mov26.jpg" alt="영상 26" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="eqc0cTUFHB4" aria-label="영상 27 재생"><img src="images/mov27.jpg" alt="영상 27" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="MmMSgtoVo6k" aria-label="영상 28 재생"><img src="images/mov28.jpg" alt="영상 28" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="5zoNScSVlOQ" aria-label="영상 29 재생"><img src="images/mov29.jpg" alt="영상 29" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="tX_0u8rXff0" aria-label="영상 30 재생"><img src="images/mov30.jpg" alt="영상 30" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="OdELnqsBlVw" aria-label="영상 31 재생"><img src="images/mov31.jpg" alt="영상 31" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="oyINH35LGBw" aria-label="영상 32 재생"><img src="images/mov32.jpg" alt="영상 32" loading="lazy"><span class="play"></span></button>
-<button class="cell vid" data-yt="q4v6eiYbb10" aria-label="영상 33 재생"><img src="images/mov33.jpg" alt="영상 33" loading="lazy"><span class="play"></span></button>
-  </div>
-
-  <footer>© ZRS MOV · Jeeyeon Kim</footer>
+  <div class="grid" id="movs"></div>
+  <footer id="foot"></footer>
 </main>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="미리보기">
@@ -208,12 +126,36 @@ function show(){
 function open(el){last=el;list=[...el.parentElement.querySelectorAll('[data-yt],[data-img]')];idx=list.indexOf(el);show();lb.classList.add('open');document.body.style.overflow='hidden';document.getElementById('lbx').focus();}
 function close(){lb.classList.remove('open');box.innerHTML='';document.body.style.overflow='';last&&last.focus();}
 function step(d){idx=(idx+d+list.length)%list.length;show();}
-document.querySelectorAll('[data-yt],[data-img]').forEach(el=>el.addEventListener('click',()=>open(el)));
 document.getElementById('lbx').onclick=close;
 document.getElementById('lbp').onclick=()=>step(-1);
 document.getElementById('lbn').onclick=()=>step(1);
 lb.addEventListener('click',e=>{if(e.target===lb)close();});
 document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1);});
+</script>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ytThumb=id=>`https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+async function render(){
+  const d=await fetch('content.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json());
+  const p=d.profile;
+  document.getElementById('side').innerHTML=`<div class="name">${esc(p.nameEn)}</div><div class="gap"></div>
+    <p><a href="tel:${esc(p.phone.replace(/[^+0-9]/g,''))}">${esc(p.phone)}</a></p>
+    <p><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></p><div class="gap"></div><p>${esc(p.location)}</p>
+    ${p.instagram?`<a class="ig" href="${esc(p.instagram)}" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>`:''}`;
+  document.getElementById('head').innerHTML=`${esc(p.nameKo)} <span class="bar"></span> <small>${esc(p.role)}</small>`;
+  const ph=document.getElementById('profilePhoto'); ph.src=p.photo; ph.alt=p.nameKo;
+  document.getElementById('careerTitle').textContent=d.careerTitle;
+  document.getElementById('career').innerHTML=d.career.map(c=>`<li>${esc(c.text)}${(c.subs||[]).filter(Boolean).map(s=>`<span class="sub">+ ${esc(s)}</span>`).join('')}</li>`).join('');
+  document.getElementById('intro').innerHTML=d.intro.filter(x=>x.trim()).map(x=>`<p>${esc(x).replace(/\n/g,'<br>')}</p>`).join('');
+  document.getElementById('fields').innerHTML=d.fields.map((f,i)=>`<button class="cell" data-img="${esc(f.img)}" aria-label="촬영 현장 사진 ${i+1} 크게 보기"><img src="${esc(f.img)}" alt="촬영 현장 ${i+1}" loading="lazy"></button>`).join('');
+  document.getElementById('movs').innerHTML=d.videos.map((v,i)=>{
+    const t=v.title||`영상 ${i+1}`, th=v.thumb||(v.yt?ytThumb(v.yt):''), cap=v.title?`<span class="cap">${esc(v.title)}</span>`:'';
+    const img=`<img src="${esc(th)}" alt="${esc(t)}" loading="lazy">`;
+    return v.yt?`<button class="cell vid" data-yt="${esc(v.yt)}" aria-label="${esc(t)} 재생">${img}<span class="play"></span>${cap}</button>`:`<div class="cell">${img}${cap}</div>`;}).join('');
+  document.getElementById('foot').textContent=`© ZRS MOV · ${p.nameEn}`;
+  document.querySelectorAll('[data-yt],[data-img]').forEach(el=>el.addEventListener('click',()=>open(el)));
+}
+render();
 </script>
 </body>
 </html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ZRS MOV 편집</title>
+<style>
+:root{--fg:#1d1d1f;--muted:#6e6e73;--line:#e3e3e8;--bg:#f5f5f7;--card:#fff;--accent:#1d1d1f;--ok:#1a7f37;--warn:#c2410c;--blue:#0a66c2;
+  --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.5}
+header{position:sticky;top:0;z-index:10;background:rgba(245,245,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{max-width:980px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar h1{font-size:16px;margin:0 auto 0 0}
+#status{font-size:12.5px;color:var(--muted);width:100%;order:3}
+#status.ok{color:var(--ok)} #status.err{color:var(--warn)}
+main{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px}
+section h2{font-size:15px;margin:0;display:flex;align-items:center;gap:8px}
+section h2 .hint{font-size:12px;font-weight:400;color:var(--muted)}
+label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+input[type=text],input[type=password],textarea{font:inherit;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;background:#fff}
+textarea{resize:vertical;min-height:60px}
+input:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:-1px;border-color:transparent}
+.btn{font:600 13px var(--sans);border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:#c7c7cc}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:disabled{opacity:.4;cursor:default}
+.btn.sm{padding:4px 8px;font-size:12px}
+.btn.del{color:var(--warn)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.row{display:grid;gap:8px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fcfcfd}
+.row .tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.row .tools .num{font:600 12px ui-monospace,Menlo,monospace;color:var(--muted);margin-right:auto}
+.vid{display:grid;grid-template-columns:160px minmax(0,1fr);gap:12px;align-items:start}
+@media(max-width:640px){.vid{grid-template-columns:110px minmax(0,1fr)}}
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:#eee;display:block}
+.thumbbox{display:grid;gap:6px}
+.badge{font-size:11px;padding:1px 6px;border-radius:4px;background:#fff4e5;color:var(--warn);justify-self:start}
+.badge.new{background:#e8f3ec;color:var(--ok)}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media(max-width:640px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.setup{border-color:#f0c48a;background:#fffaf2}
+.setup ol{margin:0;padding-left:20px;display:grid;gap:4px}
+.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inline input{flex:1;min-width:200px}
+.muted{color:var(--muted);font-size:12px}
+input[type=file]{display:none}
+a{color:var(--blue)}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <h1>ZRS MOV 사이트 편집</h1>
+  <a class="btn" href="./" target="_blank" rel="noopener">사이트 보기 ↗</a>
+  <button class="btn primary" id="saveBtn" disabled>저장하고 게시</button>
+  <div id="status">토큰을 넣으면 사이트 내용을 불러와.</div>
+</div></header>
+
+<main>
+  <section class="setup" id="setup">
+    <h2>처음 한 번: GitHub 토큰 연결</h2>
+    <ol>
+      <li>GitHub 오른쪽 위 프로필 → <b>Settings</b> → 맨 아래 <b>Developer settings</b> → <b>Personal access tokens → Fine-grained tokens</b> → <b>Generate new token</b></li>
+      <li>이름 아무거나, Expiration은 원하는 기간(최대 1년)</li>
+      <li><b>Repository access</b> → <b>Only select repositories</b> → <code>zrsplay-droid.github.io</code> 선택</li>
+      <li><b>Permissions → Repository permissions → Contents</b> → <b>Read and write</b></li>
+      <li><b>Generate token</b> → 나온 <code>github_pat_…</code> 를 복사해서 아래에 붙여넣기</li>
+    </ol>
+    <div class="inline">
+      <input type="password" id="tokenIn" placeholder="github_pat_…" autocomplete="off">
+      <button class="btn primary" id="tokenSave">연결</button>
+    </div>
+    <p class="muted">토큰은 이 브라우저에만 저장되고 다른 곳으로 보내지지 않아. 다른 기기에서 편집하려면 그 기기에서 한 번 더 넣으면 돼.</p>
+  </section>
+
+  <div id="editor" hidden>
+    <section>
+      <h2>프로필</h2>
+      <div class="grid2" id="profile"></div>
+      <div class="inline"><img id="profileImg" class="thumb" style="width:160px" alt=""><button class="btn" data-pick="profile">프로필 사진 바꾸기</button></div>
+    </section>
+
+    <section>
+      <h2>이력 <span class="hint">위에 있을수록 먼저 보여. 하위 항목(+ …)은 한 줄에 하나씩.</span></h2>
+      <label>제목<input type="text" id="careerTitle"></label>
+      <div><button class="btn" id="addCareer">+ 맨 위에 이력 추가</button></div>
+      <div id="career" style="display:grid;gap:8px"></div>
+    </section>
+
+    <section>
+      <h2>소개글 <span class="hint">빈 줄로 문단을 나눠.</span></h2>
+      <textarea id="intro" rows="12"></textarea>
+    </section>
+
+    <section>
+      <h2>촬영 현장 사진</h2>
+      <div class="photos" id="fields"></div>
+    </section>
+
+    <section>
+      <h2>Mov 영상 <span class="hint">썸네일을 안 넣으면 유튜브 썸네일이 자동으로 쓰여.</span></h2>
+      <div><button class="btn" id="addVideo">+ 맨 앞에 영상 추가</button></div>
+      <div id="videos" style="display:grid;gap:8px"></div>
+    </section>
+    <div class="inline"><button class="btn" id="disconnect">이 브라우저에서 토큰 지우기</button></div>
+  </div>
+</main>
+<input type="file" id="file" accept="image/*">
+
+<script>
+const OWNER='zrsplay-droid', REPO='zrsplay-droid.github.io', BRANCH='main', API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
+const $=id=>document.getElementById(id);
+let token='', data=null, sha=null, dirty=false, pending={}; // pending: path -> base64 (new images)
+try{token=localStorage.getItem('zrsmov_token')||'';}catch(e){}
+
+function status(t,cls=''){const s=$('status');s.textContent=t;s.className=cls;}
+function setDirty(v=true){dirty=v;$('saveBtn').disabled=!v;if(v)status('저장 안 된 변경 사항이 있어.');}
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* base64 <-> utf8 */
+function b64ToText(b){const bin=atob(b.replace(/\n/g,''));const u=Uint8Array.from(bin,c=>c.charCodeAt(0));return new TextDecoder().decode(u);}
+function bytesToB64(u){let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);}
+const textToB64=t=>bytesToB64(new TextEncoder().encode(t));
+
+async function gh(path,opts={}){
+  const r=await fetch(API+path,{...opts,headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(opts.headers||{})}});
+  if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){} const err=new Error(m||('HTTP '+r.status));err.status=r.status;throw err;}
+  return r.json();
+}
+async function load(){
+  status('불러오는 중…');
+  try{
+    const f=await gh('content.json?ref='+BRANCH);
+    sha=f.sha; data=JSON.parse(b64ToText(f.content));
+    $('setup').hidden=true; $('editor').hidden=false; pending={}; render(); setDirty(false);
+    status('불러왔어. 고친 뒤 "저장하고 게시"를 눌러줘.','ok');
+  }catch(e){
+    $('setup').hidden=false; $('editor').hidden=true;
+    status(e.status===401?'토큰이 맞지 않거나 만료됐어. 새 토큰을 넣어줘.':e.status===404?'저장소나 content.json을 찾지 못했어. 토큰의 저장소 권한을 확인해줘.':'불러오기 실패: '+e.message,'err');
+  }
+}
+
+/* YouTube ID 추출 */
+function ytId(s){s=(s||'').trim(); if(!s)return '';
+  const m=s.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([A-Za-z0-9_-]{11})/); if(m)return m[1];
+  return /^[A-Za-z0-9_-]{11}$/.test(s)?s:null;}
+const ytThumb=id=>id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:'';
+const imgSrc=p=>pending[p]?('data:image/jpeg;base64,'+pending[p]):p;
+
+/* 이미지 선택 → 리사이즈 → 대기열 */
+let pickCb=null;
+function pickImage(maxW,cb){pickCb={maxW,cb};$('file').value='';$('file').click();}
+$('file').addEventListener('change',async()=>{
+  const f=$('file').files[0]; if(!f||!pickCb)return;
+  const bmp=await createImageBitmap(f); const s=Math.min(1,pickCb.maxW/bmp.width);
+  const c=document.createElement('canvas');c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+  c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+  const b64=c.toDataURL('image/jpeg',0.84).split(',')[1];
+  const path=`images/up-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}.jpg`;
+  pending[path]=b64; pickCb.cb(path); pickCb=null; setDirty(); render();
+});
+
+/* 렌더 */
+function render(){
+  const p=data.profile;
+  const fields=[['nameKo','이름(한글)'],['nameEn','이름(영문)'],['role','직함'],['phone','전화'],['email','이메일'],['location','지역'],['instagram','인스타그램 주소']];
+  $('profile').innerHTML=fields.map(([k,l])=>`<label>${l}<input type="text" data-p="${k}" value="${esc(p[k])}"></label>`).join('');
+  $('profile').querySelectorAll('input').forEach(i=>i.oninput=()=>{p[i.dataset.p]=i.value;setDirty();});
+  $('profileImg').src=imgSrc(p.photo);
+  $('careerTitle').value=data.careerTitle; $('careerTitle').oninput=e=>{data.careerTitle=e.target.value;setDirty();};
+  $('career').innerHTML=data.career.map((c,i)=>`<div class="row">
+    <div class="tools"><span class="num">${i+1}</span>
+      <button class="btn sm" data-a="up" data-i="${i}" ${i?'':'disabled'}>↑</button><button class="btn sm" data-a="down" data-i="${i}" ${i<data.career.length-1?'':'disabled'}>↓</button><button class="btn sm del" data-a="del" data-i="${i}">삭제</button></div>
+    <input type="text" data-c="text" data-i="${i}" value="${esc(c.text)}" placeholder="예: 2026 OO 대회 촬영/편집">
+    <textarea rows="${Math.max(1,(c.subs||[]).length)}" data-c="subs" data-i="${i}" placeholder="하위 항목 (없으면 비워둬)">${esc((c.subs||[]).join('\n'))}</textarea></div>`).join('');
+  $('career').querySelectorAll('[data-c]').forEach(el=>el.oninput=()=>{const c=data.career[+el.dataset.i]; if(el.dataset.c==='text')c.text=el.value; else c.subs=el.value.split('\n').map(s=>s.trim()).filter(Boolean); setDirty();});
+  $('career').querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{move(data.career,+b.dataset.i,b.dataset.a,'이 이력을 지울까?');});
+  $('intro').value=data.intro.join('\n\n'); $('intro').oninput=e=>{data.intro=e.target.value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);setDirty();};
+  $('fields').innerHTML=data.fields.map((f,i)=>`<div class="thumbbox"><img class="thumb" src="${esc(imgSrc(f.img))}" alt=""><button class="btn sm" data-f="${i}">사진 바꾸기</button></div>`).join('');
+  $('fields').querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>pickImage(1600,path=>{data.fields[+b.dataset.f].img=path;}));
+  $('videos').innerHTML=data.videos.map((v,i)=>{const th=v.thumb?imgSrc(v.thumb):ytThumb(v.yt);
+    return `<div class="row"><div class="tools"><span class="num">${i+1}</span>
+      <button class="btn sm" data-a="up" data-i="${i}" ${i?'':'disabled'}>↑</button><button class="btn sm" data-a="down" data-i="${i}" ${i<data.videos.length-1?'':'disabled'}>↓</button><button class="btn sm del" data-a="del" data-i="${i}">삭제</button></div>
+      <div class="vid"><div class="thumbbox">${th?`<img class="thumb" src="${esc(th)}" alt="">`:'<div class="thumb"></div>'}
+        <button class="btn sm" data-t="up" data-i="${i}">썸네일 바꾸기</button>
+        ${v.thumb?`<button class="btn sm" data-t="yt" data-i="${i}">유튜브 썸네일로</button>`:'<span class="badge new">유튜브 썸네일 사용 중</span>'}</div>
+        <div style="display:grid;gap:8px"><label>유튜브 주소<input type="text" data-v="yt" data-i="${i}" value="${v.yt?'https://www.youtube.com/watch?v='+v.yt:''}" placeholder="https://www.youtube.com/watch?v=… 또는 shorts 주소"></label>
+        ${v.yt?'':'<span class="badge">유튜브 주소가 없어서 재생 버튼이 안 보여</span>'}
+        <label>제목 (마우스 올리면 보임, 비워도 됨)<input type="text" data-v="title" data-i="${i}" value="${esc(v.title)}"></label></div></div></div>`;}).join('');
+  $('videos').querySelectorAll('[data-v]').forEach(el=>{const v=data.videos[+el.dataset.i];
+    if(el.dataset.v==='title'){el.oninput=()=>{v.title=el.value;setDirty();};return;}
+    const upd=()=>{const id=ytId(el.value); if(id===null){el.style.borderColor='var(--warn)';return false;} el.style.borderColor=''; if(id!==v.yt){v.yt=id;setDirty();} return true;};
+    el.oninput=upd; el.onchange=()=>{if(upd())render();};});
+  $('videos').querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>move(data.videos,+b.dataset.i,b.dataset.a,'이 영상을 지울까?'));
+  $('videos').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const v=data.videos[+b.dataset.i];
+    if(b.dataset.t==='yt'){v.thumb='';setDirty();render();} else pickImage(800,path=>{v.thumb=path;});});
+}
+function move(arr,i,a,q){
+  if(a==='del'){ if(!confirm(q))return; arr.splice(i,1);}
+  else {const j=a==='up'?i-1:i+1; if(j<0||j>=arr.length)return; [arr[i],arr[j]]=[arr[j],arr[i]];}
+  setDirty(); render();
+}
+$('addCareer').onclick=()=>{data.career.unshift({text:'',subs:[]});setDirty();render();$('career').querySelector('input').focus();};
+$('addVideo').onclick=()=>{data.videos.unshift({yt:'',title:'',thumb:''});setDirty();render();$('videos').querySelector('[data-v="yt"]').focus();};
+document.querySelector('[data-pick="profile"]').onclick=()=>pickImage(1600,path=>{data.profile.photo=path;});
+
+/* 저장 */
+$('saveBtn').onclick=async()=>{
+  $('saveBtn').disabled=true;
+  try{
+    // 쓰이지 않는 대기 이미지는 버림
+    const json=JSON.stringify(data);
+    const ups=Object.keys(pending).filter(p=>json.includes(p));
+    let n=0;
+    for(const p of ups){status(`사진 올리는 중… (${++n}/${ups.length})`);
+      await gh(p,{method:'PUT',body:JSON.stringify({message:'사진 추가 (편집 페이지)',content:pending[p],branch:BRANCH})});}
+    status('내용 저장 중…');
+    const r=await gh('content.json',{method:'PUT',body:JSON.stringify({message:'사이트 내용 수정 (편집 페이지)',content:textToB64(JSON.stringify(data,null,1)),sha,branch:BRANCH})});
+    sha=r.content.sha; pending={}; dirty=false; render();
+    status('저장했어! 1~2분 뒤 사이트에 반영돼. (안 보이면 새로고침)','ok');
+  }catch(e){
+    status(e.status===409||e.status===422?'다른 곳에서 먼저 수정됐어. 새로고침해서 다시 불러온 뒤 고쳐줘.':'저장 실패: '+e.message,'err');
+    $('saveBtn').disabled=false;
+  }
+};
+$('tokenSave').onclick=()=>{token=$('tokenIn').value.trim(); if(!token)return; try{localStorage.setItem('zrsmov_token',token);}catch(e){} load();};
+$('disconnect').onclick=()=>{try{localStorage.removeItem('zrsmov_token');}catch(e){} token='';location.reload();};
+if(token)load();
+</script>
+</body>
+</html>
